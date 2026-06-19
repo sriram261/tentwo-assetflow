@@ -10,11 +10,13 @@
 <body>
   <header class="site-header">
     <nav class="nav container">
-      <a class="brand" href="index.html">
-        <span class="brand-mark">TT</span>
+      <a class="brand" href="index.html" aria-label="TenTwo AssetFlow home">
+        <span class="brand-logo">
+          <img src="assets/images/tentwo-logo-icon.jpg" alt="TenTwo Technologies logo">
+        </span>
         <span>
           <strong>TenTwo AssetFlow</strong>
-          <small>Supabase Backend MVP</small>
+          <small>Asset &amp; AMF tracking</small>
         </span>
       </a>
 
@@ -31,11 +33,11 @@
 
   <main class="container help-page">
     <section class="section-head help-hero">
-      <p class="eyebrow">Required setup</p>
-      <h1>Connect this website to Supabase.</h1>
+      <p class="eyebrow">Setup guide</p>
+      <h1>Connect AssetFlow to your Supabase backend.</h1>
       <p>
-        This ZIP is ready for GitHub Pages, but you must create a Supabase project and paste your
-        project URL and anon key in <code>assets/js/config.js</code>.
+        Use this page as a quick checklist. Create the Supabase project, run the SQL file,
+        add your project URL and public key, then publish the site with GitHub Pages.
       </p>
     </section>
 
@@ -43,44 +45,44 @@
       <article class="help-card">
         <span>1</span>
         <h2>Create project</h2>
-        <p>Create a free Supabase project. Save the Project URL and anon public key.</p>
+        <p>Create a Supabase project for AssetFlow and save the Project URL and public key.</p>
       </article>
 
       <article class="help-card">
         <span>2</span>
         <h2>Run SQL</h2>
-        <p>Open Supabase SQL Editor and run <code>supabase/schema.sql</code> from this ZIP.</p>
+        <p>Open Supabase SQL Editor and run <code>supabase/schema.sql</code> to create the tables.</p>
       </article>
 
       <article class="help-card">
         <span>3</span>
         <h2>Update config</h2>
-        <p>Open <code>assets/js/config.js</code> and paste your Supabase URL and anon key.</p>
+        <p>Open <code>assets/js/config.js</code> and paste the Supabase URL and public key.</p>
       </article>
 
       <article class="help-card">
         <span>4</span>
         <h2>Deploy to GitHub</h2>
-        <p>Upload this folder to GitHub and enable GitHub Pages from repository settings.</p>
+        <p>Upload the site files to GitHub and enable GitHub Pages from repository settings.</p>
       </article>
 
       <article class="help-card">
         <span>5</span>
         <h2>Create users</h2>
-        <p>Use the dashboard sign up form, or create users manually from Supabase Auth.</p>
+        <p>Create the approved users in Supabase Auth before sharing the dashboard link.</p>
       </article>
 
       <article class="help-card">
         <span>6</span>
         <h2>Start testing</h2>
-        <p>Upload AMF files, add assets, edit rows, and check shared data with your friends.</p>
+        <p>Upload AMF files, add assets, edit rows, search records, and export reports.</p>
       </article>
     </section>
 
     <section class="panel">
-      <h2>Columns included in the database</h2>
+      <h2>Database fields included</h2>
       <p class="muted">
-        I added the columns around your current AMF/master tracker workflow.
+        These fields are organized around your AMF, asset, pallet, return, and warehouse tracker workflow.
       </p>
 
       <div class="mapping-grid">
@@ -96,9 +98,9 @@
     </section>
 
     <section class="panel">
-      <h2>After setup, use this flow</h2>
+      <h2>After setup, start here</h2>
       <p class="muted">
-        Sign in, upload AMF Excel/CSV files, search assets, update status, and export filtered reports.
+        Sign in, upload AMF Excel or CSV files, search assets, update status, and export filtered reports.
       </p>
       <div class="hero-actions">
         <a class="btn primary" href="dashboard.html">Open Dashboard</a>

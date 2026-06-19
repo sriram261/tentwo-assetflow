@@ -4,17 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard | TenTwo AssetFlow</title>
-  <meta name="description" content="Supabase-powered AMF and asset tracking dashboard.">
+  <meta name="description" content="TenTwo AssetFlow dashboard for AMF files, assets, serial numbers, pallets, and return status.">
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
   <header class="site-header">
     <nav class="nav container">
-      <a class="brand" href="index.html">
-        <span class="brand-mark">TT</span>
+      <a class="brand" href="index.html" aria-label="TenTwo AssetFlow home">
+        <span class="brand-logo">
+          <img src="assets/images/tentwo-logo-icon.jpg" alt="TenTwo Technologies logo">
+        </span>
         <span>
           <strong>TenTwo AssetFlow</strong>
-          <small>Supabase Backend MVP</small>
+          <small>Asset &amp; AMF tracking</small>
         </span>
       </a>
 
@@ -31,17 +33,17 @@
 
   <main class="app-shell container">
     <section class="config-warning" id="configWarning" hidden>
-      <strong>Supabase is not configured.</strong>
-      Open <code>assets/js/config.js</code> and add your Supabase URL and anon key.
+      <strong>Supabase connection is not ready.</strong>
+      Open <code>assets/js/config.js</code> and add your Supabase URL and public key.
       Then run <code>supabase/schema.sql</code> in Supabase SQL Editor.
     </section>
 
     <section class="auth-panel panel" id="authPanel">
       <div class="panel-head">
         <div>
-          <p class="eyebrow">Login required</p>
-          <h1>Sign in to AssetFlow</h1>
-          <p>Use email and password. For demo, create 2 to 3 users and share access only with them.</p>
+          <p class="eyebrow">Secure access</p>
+          <h1>Sign in to TenTwo AssetFlow</h1>
+          <p>Use your approved email and password to access the shared asset dashboard.</p>
         </div>
       </div>
 
@@ -58,7 +60,7 @@
     <section id="appContent" hidden>
       <section class="app-title">
         <div>
-          <p class="eyebrow">Shared Supabase database</p>
+          <p class="eyebrow">Shared warehouse data</p>
           <h1>AssetFlow Dashboard</h1>
           <p id="userInfo">Loading user...</p>
         </div>
@@ -139,8 +141,8 @@
       <section class="panel">
         <div class="panel-head">
           <div>
-            <h2>AMF / Source Files</h2>
-            <p>Files imported into the shared Supabase backend.</p>
+            <h2>AMF and source files</h2>
+            <p>Files imported into the shared AssetFlow database.</p>
           </div>
         </div>
         <div class="file-list" id="fileList">
@@ -151,10 +153,10 @@
       <section class="panel">
         <div class="table-head">
           <div>
-            <h2>Asset Results</h2>
+            <h2>Asset results</h2>
             <p id="resultCount">Showing 0 assets</p>
           </div>
-          <p class="hint">Click Edit to update asset data in Supabase.</p>
+          <p class="hint">Click Edit to update the asset record.</p>
         </div>
 
         <div class="table-wrap">
@@ -275,7 +277,7 @@
   <footer class="footer">
     <div class="container footer-inner">
       <span>© 2026 TenTwo Technologies Private Limited</span>
-      <span>Shared Supabase backend</span>
+      <span>Asset &amp; AMF tracking</span>
     </div>
   </footer>
 
