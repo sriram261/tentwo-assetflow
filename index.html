@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TenTwo AssetFlow | Supabase Backend MVP</title>
+  <meta name="description" content="TenTwo AssetFlow is a Supabase-powered AMF and asset tracking MVP for small teams.">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">TT</span>
+        <span>
+          <strong>TenTwo AssetFlow</strong>
+          <small>Supabase Backend MVP</small>
+        </span>
+      </a>
+
+      <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="active">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="setup.html">Setup</a>
+        <a href="sample/amf-sample.csv">Sample CSV</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div class="hero-copy">
+        <p class="eyebrow">Shared backend for 2 to 3 users</p>
+        <h1>Track AMFs, assets, serial numbers, pallets, and return status in one shared dashboard.</h1>
+        <p class="hero-text">
+          TenTwo AssetFlow uses Supabase as a free backend MVP. Your team can log in,
+          upload AMF Excel/CSV files, search all assets, update records, and export reports.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn primary" href="dashboard.html">Open Dashboard</a>
+          <a class="btn secondary" href="setup.html">Setup Supabase</a>
+        </div>
+
+        <div class="trust-pills">
+          <span>Shared database</span>
+          <span>User login</span>
+          <span>Excel/CSV import</span>
+          <span>Asset edit history</span>
+        </div>
+      </div>
+
+      <div class="hero-panel">
+        <div class="browser-card">
+          <div class="browser-top">
+            <span></span><span></span><span></span>
+            <small>AssetFlow Supabase Preview</small>
+          </div>
+
+          <div class="preview-stats">
+            <div>
+              <strong>Backend</strong>
+              <b>Supabase</b>
+            </div>
+            <div>
+              <strong>Users</strong>
+              <b>2-3</b>
+            </div>
+            <div>
+              <strong>Data</strong>
+              <b>Shared</b>
+            </div>
+          </div>
+
+          <div class="preview-search">Search: <b>ATT-63827 or SN-NK-8842AX</b></div>
+
+          <div class="preview-row">
+            <div>
+              <b>ATT-63827 · Nokia BBU</b>
+              <span>WA3604 · AMF_MP0626_004_BBU.xlsx · Pallet MP0626-004</span>
+            </div>
+            <em class="status returned">Returned</em>
+          </div>
+
+          <div class="preview-row">
+            <div>
+              <b>SN-ER-66Q20 · Radio</b>
+              <span>WA6745 · Mastec · Needs fittings removed</span>
+            </div>
+            <em class="status pending">Pending</em>
+          </div>
+
+          <div class="preview-row">
+            <div>
+              <b>ATT-44102 · Antenna</b>
+              <span>WA8912 · Previous AMF check needed</span>
+            </div>
+            <em class="status missing">Missing</em>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">What this version solves</p>
+          <h2>Now your friends can use the same link and share the same backend data.</h2>
+          <p>
+            Unlike the local Excel-only version, this one stores asset records in Supabase.
+            If one user updates an asset, other logged-in users can refresh and see the latest data.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="icon">🔐</span>
+            <h3>Login access</h3>
+            <p>Users sign in with email and password using Supabase Auth.</p>
+          </article>
+          <article class="feature-card">
+            <span class="icon">📦</span>
+            <h3>AMF tracking</h3>
+            <p>Track AMF number, file name, vendor, site, asset type, quantity, and return status.</p>
+          </article>
+          <article class="feature-card">
+            <span class="icon">🔎</span>
+            <h3>Fast search</h3>
+            <p>Search ATT ID, serial number, site ID, pallet ID, AMF file, vendor, notes, and raw imported fields.</p>
+          </article>
+          <article class="feature-card">
+            <span class="icon">📤</span>
+            <h3>Export reports</h3>
+            <p>Export filtered results as CSV for daily reports, missing asset checks, and return updates.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="split-card">
+        <div>
+          <p class="eyebrow">Your tracker columns included</p>
+          <h2>Built around your warehouse and AMF workflow.</h2>
+          <p>
+            This schema supports entry number, tracker date, AMF number, vendor, site ID,
+            asset category, asset type, description, quantity, work type, pallet ID, AMF file name,
+            AMF date, attached/banded/returned status, return date, owner, ATT ID, serial number,
+            model, part number, location, notes, and raw imported data.
+          </p>
+        </div>
+        <a class="btn primary" href="dashboard.html">Go to Dashboard</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© 2026 TenTwo Technologies Private Limited</span>
+      <span>AssetFlow Supabase MVP</span>
+    </div>
+  </footer>
+
+  <script src="assets/js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Setup | TenTwo AssetFlow</title>
+  <meta name="description" content="Setup Supabase backend for TenTwo AssetFlow.">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">TT</span>
+        <span>
+          <strong>TenTwo AssetFlow</strong>
+          <small>Supabase Backend MVP</small>
+        </span>
+      </a>
+
+      <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="setup.html" class="active">Setup</a>
+        <a href="sample/amf-sample.csv">Sample CSV</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container help-page">
+    <section class="section-head help-hero">
+      <p class="eyebrow">Required setup</p>
+      <h1>Connect this website to Supabase.</h1>
+      <p>
+        This ZIP is ready for GitHub Pages, but you must create a Supabase project and paste your
+        project URL and anon key in <code>assets/js/config.js</code>.
+      </p>
+    </section>
+
+    <section class="help-grid">
+      <article class="help-card">
+        <span>1</span>
+        <h2>Create project</h2>
+        <p>Create a free Supabase project. Save the Project URL and anon public key.</p>
+      </article>
+
+      <article class="help-card">
+        <span>2</span>
+        <h2>Run SQL</h2>
+        <p>Open Supabase SQL Editor and run <code>supabase/schema.sql</code> from this ZIP.</p>
+      </article>
+
+      <article class="help-card">
+        <span>3</span>
+        <h2>Update config</h2>
+        <p>Open <code>assets/js/config.js</code> and paste your Supabase URL and anon key.</p>
+      </article>
+
+      <article class="help-card">
+        <span>4</span>
+        <h2>Deploy to GitHub</h2>
+        <p>Upload this folder to GitHub and enable GitHub Pages from repository settings.</p>
+      </article>
+
+      <article class="help-card">
+        <span>5</span>
+        <h2>Create users</h2>
+        <p>Use the dashboard sign up form, or create users manually from Supabase Auth.</p>
+      </article>
+
+      <article class="help-card">
+        <span>6</span>
+        <h2>Start testing</h2>
+        <p>Upload AMF files, add assets, edit rows, and check shared data with your friends.</p>
+      </article>
+    </section>
+
+    <section class="panel">
+      <h2>Columns included in the database</h2>
+      <p class="muted">
+        I added the columns around your current AMF/master tracker workflow.
+      </p>
+
+      <div class="mapping-grid">
+        <div><strong>Tracker</strong><span>entry_no, tracker_date, assigned_to, notes</span></div>
+        <div><strong>AMF</strong><span>amf_number, amf_file_name, amf_date, work_type</span></div>
+        <div><strong>Asset</strong><span>att_id, serial_number, asset_category, asset_type, asset_description</span></div>
+        <div><strong>Site</strong><span>site_id, site_name, warehouse_location</span></div>
+        <div><strong>Vendor</strong><span>vendor, contractor, manufacturer</span></div>
+        <div><strong>Return</strong><span>pallet_id, pallet_status, return_status, returned_date</span></div>
+        <div><strong>Process</strong><span>attachment_status, banding_status, condition, quantity</span></div>
+        <div><strong>Extra</strong><span>model_number, part_number, raw_data JSON</span></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>After setup, use this flow</h2>
+      <p class="muted">
+        Sign in, upload AMF Excel/CSV files, search assets, update status, and export filtered reports.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="dashboard.html">Open Dashboard</a>
+        <a class="btn secondary" href="supabase/schema.sql">Open SQL File</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© 2026 TenTwo Technologies Private Limited</span>
+      <span>Setup guide</span>
+    </div>
+  </footer>
+
+  <script src="assets/js/site.js"></script>
+</body>
+</html>

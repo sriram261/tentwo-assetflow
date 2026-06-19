@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard | TenTwo AssetFlow</title>
+  <meta name="description" content="Supabase-powered AMF and asset tracking dashboard.">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">TT</span>
+        <span>
+          <strong>TenTwo AssetFlow</strong>
+          <small>Supabase Backend MVP</small>
+        </span>
+      </a>
+
+      <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="setup.html">Setup</a>
+        <a href="sample/amf-sample.csv">Sample CSV</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="app-shell container">
+    <section class="config-warning" id="configWarning" hidden>
+      <strong>Supabase is not configured.</strong>
+      Open <code>assets/js/config.js</code> and add your Supabase URL and anon key.
+      Then run <code>supabase/schema.sql</code> in Supabase SQL Editor.
+    </section>
+
+    <section class="auth-panel panel" id="authPanel">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">Login required</p>
+          <h1>Sign in to AssetFlow</h1>
+          <p>Use email and password. For demo, create 2 to 3 users and share access only with them.</p>
+        </div>
+      </div>
+
+      <form class="auth-form" id="authForm">
+        <input id="emailInput" type="email" placeholder="Email address" required>
+        <input id="passwordInput" type="password" placeholder="Password" required minlength="6">
+        <div class="auth-actions">
+          <button class="btn primary" type="submit" data-mode="signin">Sign In</button>
+          <button class="btn secondary" type="button" id="signUpBtn">Create Account</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="appContent" hidden>
+      <section class="app-title">
+        <div>
+          <p class="eyebrow">Shared Supabase database</p>
+          <h1>AssetFlow Dashboard</h1>
+          <p id="userInfo">Loading user...</p>
+        </div>
+
+        <div class="app-actions">
+          <button class="btn secondary" id="refreshBtn" type="button">Refresh</button>
+          <button class="btn secondary" id="loadSampleBtn" type="button">Load Sample Data</button>
+          <label class="btn primary upload-label">
+            Upload AMF Excel/CSV
+            <input id="fileInput" type="file" accept=".xlsx,.xls,.csv" multiple>
+          </label>
+          <button class="btn danger" id="signOutBtn" type="button">Sign Out</button>
+        </div>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card">
+          <span>Total assets</span>
+          <strong id="statTotal">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>AMF files</span>
+          <strong id="statFiles">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Returned</span>
+          <strong id="statReturned">0</strong>
+        </article>
+        <article class="stat-card danger">
+          <span>Missing / review</span>
+          <strong id="statMissing">0</strong>
+        </article>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Search & Filter</h2>
+            <p>Search works across tracker, AMF, asset, pallet, return, and raw imported fields.</p>
+          </div>
+          <div class="panel-actions">
+            <button class="btn secondary small" id="openAssetBtn" type="button">Add Asset</button>
+            <button class="btn secondary small" id="exportBtn" type="button">Export Filtered CSV</button>
+          </div>
+        </div>
+
+        <div class="filters">
+          <input id="searchInput" type="search" placeholder="Search ATT ID, serial, site, vendor, AMF, pallet, notes, any text...">
+
+          <select id="typeFilter">
+            <option value="">All asset types</option>
+          </select>
+
+          <select id="statusFilter">
+            <option value="">All statuses</option>
+          </select>
+
+          <select id="vendorFilter">
+            <option value="">All vendors</option>
+          </select>
+        </div>
+
+        <div class="advanced-grid">
+          <input id="siteFilter" type="search" placeholder="Filter site ID">
+          <input id="amfFilter" type="search" placeholder="Filter AMF file / AMF no">
+          <input id="palletFilter" type="search" placeholder="Filter pallet">
+          <select id="sortFilter">
+            <option value="newest">Sort: Newest updated</option>
+            <option value="entry_no">Sort: Entry no.</option>
+            <option value="att_id">Sort: ATT ID</option>
+            <option value="serial_number">Sort: Serial no.</option>
+            <option value="site_id">Sort: Site ID</option>
+            <option value="return_status">Sort: Return status</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>AMF / Source Files</h2>
+            <p>Files imported into the shared Supabase backend.</p>
+          </div>
+        </div>
+        <div class="file-list" id="fileList">
+          <p class="empty">No files uploaded yet.</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="table-head">
+          <div>
+            <h2>Asset Results</h2>
+            <p id="resultCount">Showing 0 assets</p>
+          </div>
+          <p class="hint">Click Edit to update asset data in Supabase.</p>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Entry</th>
+                <th>Date</th>
+                <th>AMF No.</th>
+                <th>Vendor</th>
+                <th>Site ID</th>
+                <th>Category</th>
+                <th>Asset Type</th>
+                <th>Description</th>
+                <th>Qty</th>
+                <th>Work</th>
+                <th>Pallet</th>
+                <th>AMF File</th>
+                <th>AMF Date</th>
+                <th>Attached</th>
+                <th>Banded</th>
+                <th>Returned</th>
+                <th>Return Date</th>
+                <th>ATT ID</th>
+                <th>Serial No.</th>
+                <th>Owner</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="assetTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <dialog class="modal" id="assetModal">
+    <form method="dialog" class="modal-card" id="assetForm">
+      <div class="modal-head">
+        <h2 id="assetModalTitle">Add Asset</h2>
+        <button type="button" class="icon-btn" id="closeAssetBtn" aria-label="Close">×</button>
+      </div>
+
+      <input type="hidden" name="id" id="assetId">
+
+      <div class="form-grid">
+        <label>Entry No.<input name="entry_no" type="number" min="1"></label>
+        <label>Tracker Date<input name="tracker_date" type="date"></label>
+
+        <label>AMF Number<input name="amf_number" placeholder="MT0626-001"></label>
+        <label>AMF Date<input name="amf_date" type="date"></label>
+
+        <label>Vendor<input name="vendor" placeholder="Mastec"></label>
+        <label>Contractor<input name="contractor" placeholder="Mastec / Ericsson / Nokia"></label>
+
+        <label>Site ID<input name="site_id" placeholder="WA6745"></label>
+        <label>Site Name<input name="site_name" placeholder="Optional"></label>
+
+        <label>Asset Category<input name="asset_category" placeholder="ANT / Radio / BBU"></label>
+        <label>Asset Type<input name="asset_type" placeholder="Antenna / Radio / BBU"></label>
+
+        <label class="full">Asset Description<input name="asset_description" placeholder="Antenna, Nokia BBU, radio, small asset, etc."></label>
+
+        <label>Quantity<input name="quantity" type="number" min="0" value="1"></label>
+        <label>Work Type<input name="work_type" placeholder="Decom / Return / Staging"></label>
+
+        <label>Pallet ID<input name="pallet_id" placeholder="MP0626_001"></label>
+        <label>Pallet Status<input name="pallet_status" placeholder="Staged / Ready / Shipped"></label>
+
+        <label>AMF File Name<input name="amf_file_name" placeholder="AMF_MP0626_001_ANT.xlsx"></label>
+        <label>Attachment Status<input name="attachment_status" placeholder="Attached / Missing"></label>
+
+        <label>Banding Status<input name="banding_status" placeholder="Banded / Not banded"></label>
+        <label>Return Status
+          <select name="return_status">
+            <option value="">Select status</option>
+            <option>Pending</option>
+            <option>Staged</option>
+            <option>Returned</option>
+            <option>Missing</option>
+            <option>Needs Review</option>
+          </select>
+        </label>
+
+        <label>Returned Date<input name="returned_date" type="date"></label>
+        <label>Assigned To / Owner<input name="assigned_to" placeholder="Anoop / team member"></label>
+
+        <label>ATT ID / Asset Tag<input name="att_id" placeholder="ATT-12345"></label>
+        <label>Serial Number<input name="serial_number" placeholder="SN-12345"></label>
+
+        <label>Model Number<input name="model_number"></label>
+        <label>Part Number<input name="part_number"></label>
+
+        <label>Manufacturer<input name="manufacturer" placeholder="Nokia / Ericsson / Samsung"></label>
+        <label>Warehouse Location<input name="warehouse_location" placeholder="Rack / pile / pallet location"></label>
+
+        <label>Condition<input name="condition" placeholder="Good / Damaged / Needs Review"></label>
+        <label>Source Status<input name="source_status" placeholder="Imported / Manual / Verified"></label>
+
+        <label class="full">Notes<textarea name="notes" placeholder="Extra details, missing checks, fittings removed, etc."></textarea></label>
+      </div>
+
+      <details class="raw-box">
+        <summary>Raw imported row</summary>
+        <pre id="rawPreview">No raw data</pre>
+      </details>
+
+      <div class="modal-actions">
+        <button class="btn danger" type="button" id="deleteAssetBtn">Delete</button>
+        <button class="btn secondary" type="button" id="cancelAssetBtn">Cancel</button>
+        <button class="btn primary" type="submit">Save Asset</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast"></div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© 2026 TenTwo Technologies Private Limited</span>
+      <span>Shared Supabase backend</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/site.js"></script>
+  <script src="assets/js/dashboard.js"></script>
+</body>
+</html>
